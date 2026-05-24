@@ -1,0 +1,737 @@
+/* =========================================================================
+   ビジネスマンガの活用術 — style.css
+   既存サイト（yuka-MusubiCreate）のデザインシステムを継承
+   ========================================================================= */
+
+
+/* =========================================================================
+   1. CSS 変数（カラー・スペック）
+   ========================================================================= */
+:root {
+  /* カラー — 既存サイト継承 */
+  --accent:         #B27B66;   /* テラコッタ（メインアクセント） */
+  --accent-hover:   #9D6855;   /* テラコッタ・ホバー */
+  --accent-light:   rgba(178, 123, 102, 0.10);  /* 薄いテラコッタ背景 */
+  --bg:             #FDFBF7;   /* 温かみベージュ */
+  --bg-white:       #FFFFFF;   /* カード背景 */
+  --text-main:      #333333;   /* チャコール */
+  --text-sub:       #777777;   /* サブテキスト */
+  --border:         #EDEAE1;   /* ボーダー */
+
+  /* 効果ラベル用カラー（新サイト独自） */
+  --color-effect:   #8A6A30;   /* ✨ 効果 */
+  --color-best:     #3D7A5A;   /* ⭕ ベスプラ */
+  --color-ng:       #9B4040;   /* ❌ NG */
+
+  /* 影 — 既存サイト継承 */
+  --shadow:         0 20px 50px rgba(0, 0, 0, 0.04);
+  --shadow-hover:   0 30px 60px rgba(0, 0, 0, 0.08);
+  --shadow-card:    0 8px 30px rgba(0, 0, 0, 0.06);
+
+  /* 角丸 — 既存サイト継承 */
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm:  8px;
+
+  /* フォント — 既存サイト継承 */
+  --font-heading: 'Shippori Mincho', serif;
+  --font-body:    'Noto Sans JP', sans-serif;
+
+  /* レイアウト — 既存サイト継承 */
+  --container:      1080px;
+  --padding-x:      40px;
+  --section-py:     140px;
+
+  --transition: 0.3s ease;
+}
+
+
+/* =========================================================================
+   2. リセット & ベース
+   ========================================================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  color: var(--text-main);
+  background-color: var(--bg);
+  line-height: 1.85;
+  letter-spacing: 0.05em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--transition), opacity var(--transition);
+}
+a:hover { color: var(--accent-hover); }
+
+/* フォーカス可視化（アクセシビリティ） */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+ul, ol { list-style: none; }
+
+strong {
+  font-weight: 700;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text-main);
+}
+
+
+/* =========================================================================
+   3. レイアウトユーティリティ
+   ========================================================================= */
+.container {
+  max-width: var(--container);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--padding-x);
+  padding-right: var(--padding-x);
+}
+
+section {
+  padding: var(--section-py) 0;
+}
+
+
+/* =========================================================================
+   4. ヘッダー
+   ========================================================================= */
+.site-header {
+  background: linear-gradient(135deg, #F8F4EC 0%, var(--bg) 100%);
+  padding: 72px var(--padding-x) 60px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+}
+
+.site-title {
+  font-size: 2.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-main);
+  margin-bottom: 12px;
+  line-height: 1.35;
+}
+
+.site-subtitle {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--text-sub);
+  letter-spacing: 0.12em;
+  font-family: var(--font-body);
+}
+
+
+/* =========================================================================
+   5. ヒーローセクション
+   ========================================================================= */
+.hero {
+  background: linear-gradient(160deg, #F8F4EC 0%, var(--bg) 60%, #FAF7F2 100%);
+  padding: 80px var(--padding-x);
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 56px;
+}
+
+.hero-lead {
+  flex: 1;                  /* リード文が伸縮して画像と重みを分け合う */
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--text-main);
+  line-height: 2;
+  letter-spacing: 0.06em;
+}
+
+.hero-lead strong {
+  color: var(--accent);
+  font-size: 1.7rem;
+  background: linear-gradient(transparent 65%, rgba(178, 123, 102, 0.18) 65%);
+  padding: 0 4px;
+}
+
+.hero-image {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-image img {
+  width: 400px;             /* 350〜450px の中央値 */
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  /* 影・枠線なし（透過処理後にページへ自然に溶け込む） */
+}
+
+
+/* =========================================================================
+   6. イントロセクション
+   ========================================================================= */
+.intro { background-color: var(--bg); }
+
+.intro .container > p {
+  font-size: 1.05rem;
+  color: var(--text-main);
+  margin-bottom: 22px;
+  max-width: 720px;
+}
+
+.intro-question {
+  background-color: var(--bg-white);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 32px 36px;
+  margin: 36px 0;
+  box-shadow: var(--shadow);
+  max-width: 720px;
+}
+
+.intro-question > p {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text-main);
+  margin-bottom: 18px;
+}
+
+.intro-question ul {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.intro-question ul li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 0.97rem;
+  color: var(--text-sub);
+  line-height: 1.75;
+}
+
+/* チェック箱風マーカー */
+.intro-question ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid var(--accent);
+  border-radius: 3px;
+  background-color: var(--bg-white);
+}
+
+
+/* =========================================================================
+   7. 全体マップセクション
+   ========================================================================= */
+.map {
+  background-color: var(--bg-white);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.map h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 32px;
+  letter-spacing: 0.06em;
+  position: relative;
+  padding-bottom: 16px;
+}
+
+.map h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 1px;
+  background-color: var(--accent);
+}
+
+/* 2列グリッド */
+.map-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  counter-reset: map-counter;
+}
+
+.map-list li { counter-increment: map-counter; }
+
+.map-list li a {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 20px;
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text-main);
+  line-height: 1.6;
+  transition: background-color var(--transition),
+              border-color var(--transition),
+              box-shadow var(--transition),
+              transform var(--transition);
+}
+
+.map-list li a:hover {
+  background-color: var(--accent-light);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-card);
+  transform: translateY(-2px);
+  color: var(--text-main);
+}
+
+
+/* =========================================================================
+   8. 場面セクション（共通）
+   ========================================================================= */
+.scene { background-color: var(--bg); }
+
+/* 偶数場面で背景を切り替えてメリハリを出す */
+.scene:nth-of-type(even) {
+  background-color: #FAF7F2;
+}
+
+.scene .container {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+/* ---- 場面ヘッダー ---- */
+.scene-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+/* 番号バッジ — 新サイト独自の装飾的な数字 */
+.scene-number {
+  flex-shrink: 0;
+  font-family: var(--font-heading);
+  font-size: 3.2rem;
+  font-weight: 600;
+  color: var(--accent);
+  opacity: 0.28;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  min-width: 56px;
+  padding-top: 4px;
+}
+
+.scene-title {
+  font-size: 1.65rem;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  padding-top: 6px;
+}
+
+/* ---- キャッチコピー（blockquote） ---- */
+.scene-catch {
+  background-color: var(--accent-light);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 22px 32px;
+  margin: 0;
+  box-shadow: var(--shadow);
+}
+
+.scene-catch p {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--text-main);
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+}
+
+/* ---- ボディ（画像＋テキスト） ---- */
+.scene-body {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ---- マンガ画像 ---- */
+.scene-image { text-align: center; }
+
+.scene-image img {
+  max-width: 560px;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-hover);
+  transition: transform var(--transition), box-shadow var(--transition);
+  background-color: var(--border);
+  min-height: 4px;   /* 画像未配置時に崩れない */
+}
+
+.scene-image img:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 40px 70px rgba(0, 0, 0, 0.1);
+}
+
+/* ---- テキストブロック群 ---- */
+.scene-text {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.scene-block {
+  background-color: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 26px 28px;
+  box-shadow: var(--shadow);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.scene-block:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-3px);
+}
+
+/* 「こんな場面で」は2列にまたがる */
+.scene-block:first-child {
+  grid-column: 1 / -1;
+}
+
+.scene-block h3 {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--text-sub);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.scene-block ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.scene-block ul li {
+  font-size: 0.95rem;
+  color: var(--text-main);
+  line-height: 1.75;
+  padding-left: 4px;
+}
+
+/* 効果リスト */
+.effect-list li { color: var(--color-effect); }
+
+/* ベストプラクティスリスト */
+.best-list li { color: var(--color-best); }
+
+/* NGリスト */
+.ng-list li { color: var(--color-ng); }
+
+/* ---- ゆかさんからのワンポイント ---- */
+.onepoint {
+  background-color: var(--bg-white);
+  border: 1.5px solid var(--accent);
+  border-radius: var(--radius-lg);
+  padding: 32px 36px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 左端の装飾ライン */
+.onepoint::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--accent) 0%, #D4A880 100%);
+}
+
+.onepoint h3 {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 14px;
+  padding-left: 2px;
+  letter-spacing: 0.06em;
+}
+
+.onepoint blockquote {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.onepoint blockquote p {
+  font-size: 0.97rem;
+  color: var(--text-main);
+  line-height: 2;
+  letter-spacing: 0.04em;
+}
+
+
+/* =========================================================================
+   9. 最後のメッセージ（closing）
+   ========================================================================= */
+.closing {
+  background: linear-gradient(160deg, #F8F4EC 0%, var(--bg) 100%);
+  text-align: center;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.closing h2 {
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 36px;
+  letter-spacing: 0.06em;
+}
+
+.closing .container > p {
+  font-size: 1.02rem;
+  color: var(--text-main);
+  line-height: 2;
+  margin-bottom: 20px;
+  max-width: 520px;        /* 行を短めに抑えて改行位置を安定させる */
+  margin-left: auto;
+  margin-right: auto;
+  /* 日本語自然改行 */
+  word-break: auto-phrase; /* モダンブラウザで文節単位の改行 */
+  line-break: strict;      /* 句読点を行頭に置かない */
+  overflow-wrap: anywhere; /* 非対応ブラウザの補助 */
+}
+
+.closing .container > p:last-child { margin-bottom: 0; }
+
+
+/* =========================================================================
+   10. お問い合わせセクション
+   ========================================================================= */
+.contact { background-color: var(--bg-white); }
+
+.contact h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 28px;
+  letter-spacing: 0.06em;
+  position: relative;
+  padding-bottom: 16px;
+}
+
+.contact h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 1px;
+  background-color: var(--accent);
+}
+
+.contact ul {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.contact ul li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 0.97rem;
+  color: var(--text-main);
+}
+
+.contact ul li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.contact-link {
+  font-size: 0.95rem;
+  color: var(--text-sub);
+}
+
+.contact-link a {
+  color: var(--accent);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  word-break: break-all;
+}
+
+.contact-link a:hover { color: var(--accent-hover); }
+
+
+/* =========================================================================
+   11. フッター
+   ========================================================================= */
+.site-footer {
+  background-color: var(--text-main);
+  color: rgba(255, 255, 255, 0.75);
+  padding: 60px var(--padding-x) 40px;
+  text-align: center;
+}
+
+.site-footer .container > p {
+  font-size: 0.95rem;
+  line-height: 1.85;
+  margin-bottom: 6px;
+}
+
+.site-footer strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.copyright {
+  display: block;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.38);
+  margin-top: 24px;
+  letter-spacing: 0.1em;
+}
+
+
+/* =========================================================================
+   12. レスポンシブ — タブレット（992px 以下）
+   ========================================================================= */
+@media (max-width: 992px) {
+  :root {
+    --section-py: 100px;
+    --padding-x:   32px;
+  }
+
+  .hero-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 32px;
+  }
+
+  .hero-image img {
+    width: 320px;           /* タブレットでは少し縮小 */
+  }
+
+  .scene-text {
+    grid-template-columns: 1fr;
+  }
+
+  /* 「こんな場面で」の特例をリセット */
+  .scene-block:first-child {
+    grid-column: auto;
+  }
+
+  .map-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* =========================================================================
+   13. レスポンシブ — スマートフォン（768px 以下）
+   ========================================================================= */
+@media (max-width: 768px) {
+  html { font-size: 93.75%; }
+
+  :root {
+    --section-py: 80px;
+    --padding-x:  20px;
+  }
+
+  /* ---- ヘッダー ---- */
+  .site-header { padding: 48px 20px 40px; }
+  .site-title  { font-size: 1.9rem; }
+  .site-subtitle { font-size: 0.92rem; }
+
+  /* ---- ヒーロー ---- */
+  .hero-lead { font-size: 1.2rem; }
+  .hero-lead strong { font-size: 1.35rem; }
+  .hero-image img {
+    width: min(280px, 80vw);   /* スマホ幅に収まる範囲で最大 280px */
+    height: auto;
+  }
+
+  /* ---- 全体マップ ---- */
+  .map-list { grid-template-columns: 1fr; }
+
+  /* ---- 場面 ---- */
+  .scene-number { font-size: 2.4rem; min-width: 40px; }
+  .scene-title  { font-size: 1.25rem; }
+  .scene-catch p { font-size: 1rem; }
+  .scene-image img { max-width: 100%; }
+  .scene-block  { padding: 20px 20px; }
+  .scene-block ul li { font-size: 0.93rem; }
+
+  .onepoint { padding: 24px 22px; }
+  .onepoint blockquote p { font-size: 0.93rem; }
+
+  /* ---- クロージング ---- */
+  .closing h2 { font-size: 1.35rem; }
+
+  /* ---- お問い合わせ ---- */
+  .contact h2 { font-size: 1.25rem; }
+
+  /* ---- フッター ---- */
+  .site-footer { padding: 48px 20px 32px; }
+}
