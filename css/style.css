@@ -476,8 +476,6 @@ section {
 /* ベストプラクティスリスト */
 .best-list li { color: var(--color-best); }
 
-/* NGリスト */
-.ng-list li { color: var(--color-ng); }
 
 /* ---- ゆかさんからのワンポイント ---- */
 .onepoint {
